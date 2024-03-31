@@ -66,17 +66,22 @@ function App() {
     });
   }
 
+  const ctxValue = {
+    items: shoppingCart.items,
+    addItem: handleAddItemToCart,
+    updateItemQuantity: handleUpdateCartItemQuantity,
+  }
+
   return (
     //we pass default value to the provider, so that we can access it anywhere in the app specially if the component is not wrapped directly with the context.
-    <CartContext.Provider value={{items : []}}>
+    <CartContext.Provider value={ctxValue}>
       <Header
         cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
       <Shop >
         {DUMMY_PRODUCTS.map((product) => (
             <li key={product.id}>
-              <Product {...product} onAddToCart={handleAddItemToCart} />
+              <Product {...product} />
             </li>
         ))}
         </Shop>
